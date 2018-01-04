@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private String email;
     private String phone;
 
-    private boolean enabled=true;
+    private boolean enabled = true;
 
     @OneToOne
     private PrimaryAccount primaryAccount;
@@ -58,8 +58,44 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
+    
+    
+    
+    public User() {
+		super();
+	}
+    
+	public User(String username, String password, String firstName, String lastName, String email, String phone,
+			Set<UserRole> userRoles) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.userRoles = userRoles;
+	}
 
-    public Set<UserRole> getUserRoles() {
+	public User(String username, String password, String firstName, String lastName, String email, String phone,
+			boolean enabled, PrimaryAccount primaryAccount, SavingsAccount savingsAccount,
+			List<Appointment> appointmentList, List<Recipient> recipientList, Set<UserRole> userRoles) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.enabled = enabled;
+		this.primaryAccount = primaryAccount;
+		this.savingsAccount = savingsAccount;
+		this.appointmentList = appointmentList;
+		this.recipientList = recipientList;
+		this.userRoles = userRoles;
+	}
+
+	public Set<UserRole> getUserRoles() {
         return userRoles;
     }
 
